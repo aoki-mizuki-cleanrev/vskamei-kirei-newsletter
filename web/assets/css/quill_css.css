@@ -1,0 +1,123 @@
+strong {
+    /* font-size: 24px; */
+    font-weight: 800;
+}
+
+u {
+    text-decoration: underline;
+    font-weight: inherit;
+    font-style: inherit;
+}
+
+em {
+    font-style: italic;
+    font-weight: inherit;
+}
+
+section {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* ----------------------- */
+/* エディターのスタイル */
+#editor-container {
+    height: 500px;
+    font-size: 16px; /* デフォルトフォントサイズを16pxに設定 */
+}
+
+/* Iframeのスタイル */
+.quill-iframe {
+    border: none;
+    max-width: 100%;
+}
+
+/* ツールバーボタンのスタイル調整（オプション） */
+#toolbar button,
+#toolbar .ql-picker {
+    margin-right: 5px;
+}
+
+/* 目次のスタイル */
+#toc-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+#toc-container h3 {
+    margin-top: 0;
+}
+
+#toc-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#toc-container ul li {
+    margin: 5px 0;
+}
+
+#toc-container ul li a {
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+#toc-container ul li a:hover {
+    text-decoration: underline;
+}
+
+/* フォントサイズクラスの定義 */
+.ql-size-12px {
+    font-size: 12px;
+}
+.ql-size-14px {
+    font-size: 14px;
+}
+.ql-size-16px {
+    font-size: 16px;
+}
+.ql-size-18px {
+    font-size: 18px;
+}
+.ql-size-20px {
+    font-size: 20px;
+}
+.ql-size-24px {
+    font-size: 24px;
+}
+.ql-size-32px {
+    font-size: 32px;
+}
+
+/* セグメント線（hr）のスタイル */
+.ql-hr {
+    border: none;
+    border-top: 2px solid #666;
+    margin: 10px 0;
+}
+.ql-snow .ql-editor h1,
+.ql-snow .ql-editor h2,
+.ql-snow .ql-editor h3 {
+    margin: 6px 0;
+}
+/* 
+h1::before {
+    content: "●";
+} */
+
+#generate-toc,
+#insert-iframe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        filter: brightness(0) saturate(100%) invert(26%) sepia(68%) saturate(5680%) hue-rotate(199deg) brightness(91%) contrast(100%);
+    }
+}
