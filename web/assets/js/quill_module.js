@@ -1,10 +1,10 @@
 import { concat_html, create_page } from "./create_page.js";
 
-// hero ------------------------
-document.querySelector("#page_title").addEventListener("change", (e) => {
-    const hero_title = document.querySelector(".parts_hero__title");
-    hero_title.textContent = e.target.value;
-});
+// // hero ------------------------
+// document.querySelector("#page_title").addEventListener("change", (e) => {
+//     const hero_title = document.querySelector(".parts_hero__title");
+//     hero_title.textContent = e.target.value;
+// });
 
 // ---------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
             node.setAttribute("frameborder", "0");
             node.setAttribute("allowfullscreen", "");
             node.setAttribute("width", value.width || "600");
-            node.setAttribute("height", value.height || "400");
+            node.setAttribute("height", value.height || "auto");
             return node;
         }
 
@@ -193,6 +193,15 @@ document.addEventListener("DOMContentLoaded", function() {
         generateTOC();
     });
 
+    // src属性の値を取得
+    function getSrc(tag) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(tag, "text/html");
+        const iframe = doc.querySelector("iframe");
+
+        return iframe.getAttribute("src");
+    }
+
     /**
      * 挿入フォームの送信イベントハンドラー
      */
@@ -201,9 +210,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const type = insertTypeInput.value;
 
         if (type === "iframe") {
-            const iframeUrl = document.getElementById("iframe-url").value.trim();
+            const iframeTag = document.getElementById("iframe-url").value.trim();
             const iframeWidth = document.getElementById("iframe-width").value.trim();
-            const iframeHeight = document.getElementById("iframe-height").value.trim();
+            // const iframeHeight = document.getElementById("iframe-height").value.trim();
+            const iframeHeight = "auto";
+
+            // src属性取り出し
+            const iframeUrl = getSrc(iframeTag);
 
             // URLの簡単なバリデーション
             const iframeUrlPattern = /^(https?:\/\/)/i;
@@ -317,12 +330,15 @@ document.addEventListener("DOMContentLoaded", function() {
     /**
      * 保存ボタンのイベントリスナー
      */
-    const saveButton = document.getElementById("saveBtn");
+    const saveButton = document.getElementById("save_btn");
     saveButton.addEventListener("click", () => {
-        const hero = document.querySelector(".parts_hero").outerHTML;
+        const hero_title = document.querySelector("#parts_hero__title").value;
+        const hero_bg = document.querySelector(".part_hero__background").src;
         const top = document.querySelector("#toc-container").innerHTML;
         const content = quill.root.innerHTML;
-        const concat = concat_html(hero, top, content);
+        const footer = document.querySelector("footer").outerHTML;
+
+        const concat = concat_html(hero_title, hero_bg, top, content, footer);
         console.log(concat); // サーバーに送信するなどの処理を実装
 
         create_page(concat);

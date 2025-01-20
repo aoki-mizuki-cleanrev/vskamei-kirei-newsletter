@@ -3,10 +3,6 @@
 $json = file_get_contents("php://input");
 $html_contents = json_decode($json, true);
 $res = $html_contents;
-// ファイルに書き込むテキスト
-// $content = "改行を含む
-// テキストを書き込む\n\n";
-// $content2 = "テストテキスト";
 
 // ファイルを保存するディレクトリのパス
 $path = '../output';
@@ -32,4 +28,5 @@ fclose($file_handle);
 
 }
 
-return json_encode($res);
+echo 'https://133.18.178.100/vskamei-kirei-newsletter/output/data.html';
+return ;

@@ -23,7 +23,7 @@ section {
 /* ----------------------- */
 /* エディターのスタイル */
 #editor-container {
-    height: 500px;
+    height: 100vh;
     font-size: 16px; /* デフォルトフォントサイズを16pxに設定 */
 }
 
@@ -31,6 +31,7 @@ section {
 .quill-iframe {
     border: none;
     max-width: 100%;
+    aspect-ratio: 16/9;
 }
 
 /* ツールバーボタンのスタイル調整（オプション） */
@@ -105,6 +106,14 @@ section {
 .ql-snow .ql-editor h2,
 .ql-snow .ql-editor h3 {
     margin: 6px 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h6 {
+    margin-bottom: 1.5rem;
 }
 /* 
 h1::before {

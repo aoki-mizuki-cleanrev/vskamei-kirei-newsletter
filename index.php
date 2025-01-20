@@ -20,12 +20,12 @@
                 <div class="insert_area">
                     <?php include('./web/components/hero.php') ?>
                     <?php include('./web/components/quill_editer.php') ?>
+                    <?php include('./web/components/footer.php') ?>
                 </div>
-                </html>
+                
                 <!--  -->
                 <textarea name="" id="page_html" style="display: none"></textarea>
             </div>
-            <!-- <?php include('./web/components/sidenav.php') ?> -->
         </main>
 
         <!-- <script src="./web/assets/js/create_page.js"></script> -->
@@ -35,5 +35,6 @@
         <!-- Quillライブラリ -->
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script src="./web/assets/js/quill_module.js" type="module"></script>
+        <script src="./web/assets/js/index.js"></script>
     </body>
 </html>

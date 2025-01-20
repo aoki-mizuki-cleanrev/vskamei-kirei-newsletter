@@ -10,7 +10,7 @@
                 <li><button type="button">icon</button></li>
                 <li><button type="button">icon</button></li>
                 <li><button type="button">icon</button></li>
-                <li><button type="button" id="saveBtn">SAVE</button></li>
+                <li><button type="button" class="btn btn-primary" id="save_btn">SAVE</button></li>
             </ul>
         </nav>
 

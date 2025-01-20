@@ -77,7 +77,7 @@
         </div>
 
         <!-- 目次コンテナ -->
-        <div id="toc-container" style="display:none;">
+        <div id="toc-container">
             <h3>目次</h3>
             <ul id="toc-list">
                 <!-- 目次項目がここに挿入されます -->
@@ -86,9 +86,6 @@
 
         <!-- エディター -->
         <div id="editor-container"></div>
-
-        <!-- 保存ボタン -->
-        <button id="saveBtn" class="btn btn-success mt-3">保存</button>
 
         <!-- モーダル -->
         <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
@@ -103,8 +100,8 @@
                             <!-- Iframe挿入用フォーム -->
                             <div id="modal-body-content">
                                 <div class="mb-3">
-                                    <label for="iframe-url" class="form-label">IframeのURL</label>
-                                    <input type="url" class="form-control" id="iframe-url" placeholder="https://example.com" required />
+                                    <label for="iframe-url" class="form-label">Iframe Tag</label>
+                                    <input type="text" class="form-control" id="iframe-url" placeholder="<iframe width='560' height='315' src=...." required />
                                 </div>
                                 <div class="mb-3">
                                     <label for="iframe-width" class="form-label">幅（px）</label>
@@ -112,7 +109,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="iframe-height" class="form-label">高さ（px）</label>
-                                    <input type="number" class="form-control" id="iframe-height" value="400" required />
+                                    <span class="form-control" style="background: #cacaca;">auto</span>
+                                    <!-- <input type="number" class="form-control" id="iframe-height" value="400" required /> -->
                                 </div>
                             </div>
                             <input type="hidden" id="insert-type" value="" />
