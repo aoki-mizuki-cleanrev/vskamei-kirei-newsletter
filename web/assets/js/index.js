@@ -15,3 +15,35 @@ hero_bg_image_input.addEventListener("change", (e) => {
         hero_bg_image.src = e.target.result;
     });
 });
+
+// document.querySelector("#save_btn").addEventListener("click", () => {
+//     const title = document
+//         .querySelector("#parts_hero__title")
+//         .value.replace(/\r?\n/g, "")
+//         .replace(/\./g, "_")
+//         .replace("KIREI通信", "KIREI-NewsLetter_");
+
+//     console.log("保存！");
+//     const post_data = {
+//         title: title,
+//     };
+
+//     fetch("./backend/create_public_site.php", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "Application/json",
+//         },
+//         body: JSON.stringify(post_data),
+//     })
+//         .then((res) => {
+//             if (res.ok) {
+//                 return res.text();
+//             } else {
+//                 throw new Error("Network response was not ok!");
+//             }
+//         })
+//         .then((data) => {
+//             console.log(data);
+//         })
+//         .catch((er) => console.error("Error!", er));
+// });

@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Sans+JP:wght@100..900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Noto Sans JP", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+html {
+    /* font-size: 62.5%; */
+}
+a,
+a:hover,
+a:visited {
+    color: inherit;
+}
+body {
+    /* font-size: 1.6rem; */
+}
+
+:root {
+    --header-height: 64px;
+}
+
+.container {
+    padding: 0 10px;
+}
+
+/* -------------------- */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0px 2px 4px #00000029;
+    z-index: 10;
+}
+
+.header_container {
+    width: 100%;
+    height: 100%;
+    padding: 0 1%;
+}
+
+.burger_box {
+    margin-left: auto;
+    background: #eee;
+    width: 50px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.burger_menu {
+    position: fixed;
+    top: 50px;
+    right: 0;
+
+    width: 20%;
+    height: 100svh;
+    background: rgba(0, 0, 0, 0.76);
+    z-index: 9;
+    color: #fff;
+
+    box-shadow: 0px 2px 4px #00000029;
+}
+
+.burger_menu_list {
+    width: 100%;
+    padding: 0;
+
+    & > li {
+        border-bottom: 1px dashed #4e4e4e;
+        padding: 0;
+    }
+
+    & > li > a {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+
+        padding: 20px 30px;
+    }
+}
+
+/* ------------------------- */
+
+main {
+    display: flex;
+
+    min-height: calc(100svh - var(--header-height));
+    /* overflow-y: auto; */
+    width: 100%;
+}
+
+.parts_hero {
+    width: 100%;
+    height: 573px;
+    background: linear-gradient(-45deg, #313131, #8b8b8b);
+    display: block;
+    position: relative;
+}
+
+/* backgroundのfilter */
+.parts_hero::after {
+    content: "";
+    background: #000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+img.part_hero__background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    /* filter: grayscale(90%); */
+}
+
+/* as create page */
+pre.parts_hero__title {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 80px;
+    color: #fff;
+    z-index: 2;
+    text-align: center;
+    align-content: center;
+
+    font-family: "Merriweather", Arial;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 96px;
+}
+
+footer {
+    height: 150px;
+    background: #333;
+    color: #fff;
+    padding: 20px 4%;
+}
+
+.l_head__list {
+    padding: 0;
+    & li > span {
+        display: inline-block;
+        min-width: 40px;
+        padding-right: 10px;
+    }
+}
+
+.hidden {
+    display: none;
+}

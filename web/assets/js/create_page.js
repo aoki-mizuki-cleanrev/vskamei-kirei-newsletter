@@ -10,9 +10,7 @@ export function concat_html(hero_title, hero_bg, toc_content, editor_contents, f
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Quillのスタイルシート -->
-        
-        <link href="../web/assets/css/style.css" rel="stylesheet" />
-        <link href="../web/assets/css/quill_css.css" rel="stylesheet" />
+        <link href="../web/assets/css/webpage.css" rel="stylesheet" />
     </head>
     `;
 
@@ -28,14 +26,14 @@ export function concat_html(hero_title, hero_bg, toc_content, editor_contents, f
         ${editor_contents}
     </div>
     ${footer_content}
-    </body>`;
+    </body></html>`;
 
     console.log(body_html);
     return meta_html + body_html;
 }
 
 export function create_page(html_data) {
-    fetch("./backend/create_file.php", {
+    return fetch("./backend/create_preview_file.php", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -56,21 +54,16 @@ export function create_page(html_data) {
             // if (confirm(`出力先URL：${data} \n ジャンプしますか？`)) {
             //     window.open(data, "_blank");
             // }
-            fetch("./web/components/preview.php")
-                .then((res) => {
-                    if (res.ok) {
-                        return res.text();
-                    } else {
-                        throw new Error("Network response was not ok");
-                    }
-                })
-                .then((preview_html) => {
-                    document.querySelector(".cover").outerHTML = preview_html;
-                    display_control(".cover");
-                })
-                .catch((er) => console.error("error!", er));
+            return fetch("./web/components/preview.php").then((res) => {
+                if (res.ok) {
+                    return res.text();
+                } else {
+                    throw new Error("Network response was not ok");
+                }
+            });
         })
         .catch((er) => {
             console.error("error!", er);
+            throw er;
         });
 }

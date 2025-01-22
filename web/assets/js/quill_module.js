@@ -363,9 +363,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // }
 
     /**
-     * 保存ボタンのイベントリスナー
+     * プレビューボタンのイベントリスナー
      */
-    const outputFileHandler = () => {
+    function outputFileHandler(isPreview) {
         const hero_title = document.querySelector("#parts_hero__title").value;
         const hero_bg = document.querySelector(".part_hero__background").src;
         const top = document.querySelector("#toc-container").innerHTML;
@@ -374,12 +374,63 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const concat = concat_html(hero_title, hero_bg, top, content, footer);
         // console.log(concat);
-        create_page(concat);
-    };
+        if (isPreview == true) {
+            const data = create_page(concat).then((preview_html) => {
+                document.querySelector(".cover").outerHTML = preview_html;
+                display_control(".cover");
+                // return preview_html;
+            });
+        } else {
+            return concat;
+        }
+    }
 
     // const saveButton = document.getElementById("save_btn");
 
-    document.querySelector("#preview_btn").addEventListener("click", outputFileHandler);
+    // プレビュー表示のトリガー
+    document.querySelector("#preview_btn").addEventListener("click", () => outputFileHandler(true));
+
+    /**
+     * 保存ボタンのイベントリスナー
+     */
+    document.querySelector("#save_btn").addEventListener("click", () => {
+        const title = document
+            .querySelector("#parts_hero__title")
+            .value.replace(/\r?\n/g, "")
+            .replace(/\./g, "_")
+            .replace("KIREI通信", "KIREI-NewsLetter_");
+
+        console.log("保存！");
+        const post_data = {
+            title: title,
+        };
+        const concat = outputFileHandler();
+
+        create_page(concat)
+            .then((data) => {
+                fetch("./backend/create_public_site.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "Application/json",
+                    },
+                    body: JSON.stringify(post_data),
+                })
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.text();
+                        } else {
+                            throw new Error("Network response was not ok!");
+                        }
+                    })
+                    .then((data) => {
+                        console.log(data);
+                    });
+            })
+            .catch((er) => {
+                console.error("error!!", er);
+                throw er;
+            });
+    });
 
     /**
      * カスタムサイズ選択時の処理
