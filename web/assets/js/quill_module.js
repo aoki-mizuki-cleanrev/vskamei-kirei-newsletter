@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
             node.setAttribute("frameborder", "0");
             node.setAttribute("allowfullscreen", "");
             node.setAttribute("width", value.width || "600");
-            node.setAttribute("height", value.height || "auto");
+            node.setAttribute("height", value.height || "500");
+            node.classList.add(value.classList);
             return node;
         }
 
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 src: node.getAttribute("src"),
                 width: node.getAttribute("width"),
                 height: node.getAttribute("height"),
+                classlist: node.getAttribute("class"),
             };
         }
     }
@@ -127,6 +129,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const modalBodyContent = document.getElementById("modal-body-content");
     const insertTypeInput = document.getElementById("insert-type");
 
+    const aspectRatioCheckbox = document.getElementById("iframe-aspect");
+
     /**
      * Iframe挿入ボタンのクリックイベントハンドラー
      */
@@ -202,6 +206,17 @@ document.addEventListener("DOMContentLoaded", function() {
         return iframe.getAttribute("src");
     }
 
+    // アスペクト比チェックイベントハンドラー
+    aspectRatioCheckbox.addEventListener("change", () => {
+        if (aspectRatioCheckbox.checked) {
+            document.querySelector("#iframe-height").disabled = true;
+        } else {
+            document.querySelector("#iframe-height").disabled = false;
+        }
+
+        console.log("checkしたよ");
+    });
+
     /**
      * 挿入フォームの送信イベントハンドラー
      */
@@ -212,8 +227,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (type === "iframe") {
             const iframeTag = document.getElementById("iframe-url").value.trim();
             const iframeWidth = document.getElementById("iframe-width").value.trim();
-            // const iframeHeight = document.getElementById("iframe-height").value.trim();
-            const iframeHeight = "auto";
+            let iframeHeight = document.getElementById("iframe-height").value.trim();
+            const hasCheckedAspectRatio = document.getElementById("iframe-aspect").checked;
+            let extraClass;
+
+            if (hasCheckedAspectRatio) {
+                extraClass = "quill-iframe-yt";
+                iframeHeight = "auto";
+            }
+            // const iframeHeight = "auto";
 
             // src属性取り出し
             const iframeUrl = getSrc(iframeTag);
@@ -239,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     src: iframeUrl,
                     width: iframeWidth,
                     height: iframeHeight,
+                    classList: extraClass,
                 },
                 Quill.sources.USER
             );
@@ -326,12 +349,23 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
     }
+    // ---
+    // function display_control(elem_class) {
+    //     document.querySelector(elem_class).classList.toggle("hidden");
+
+    //     if (document.querySelector(elem_class).matches(".hidden")) {
+    //         document.body.style.height = "";
+    //         document.body.style.overflow = "";
+    //     } else {
+    //         document.body.style.height = "100vh";
+    //         document.body.style.overflow = "hidden";
+    //     }
+    // }
 
     /**
      * 保存ボタンのイベントリスナー
      */
-    const saveButton = document.getElementById("save_btn");
-    saveButton.addEventListener("click", () => {
+    const outputFileHandler = () => {
         const hero_title = document.querySelector("#parts_hero__title").value;
         const hero_bg = document.querySelector(".part_hero__background").src;
         const top = document.querySelector("#toc-container").innerHTML;
@@ -339,12 +373,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const footer = document.querySelector("footer").outerHTML;
 
         const concat = concat_html(hero_title, hero_bg, top, content, footer);
-        console.log(concat); // サーバーに送信するなどの処理を実装
-
+        // console.log(concat);
         create_page(concat);
+    };
 
-        // alert("コンテンツがコンソールに出力されました。");
-    });
+    // const saveButton = document.getElementById("save_btn");
+
+    document.querySelector("#preview_btn").addEventListener("click", outputFileHandler);
 
     /**
      * カスタムサイズ選択時の処理

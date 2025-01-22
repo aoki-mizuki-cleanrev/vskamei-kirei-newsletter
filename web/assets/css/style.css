@@ -71,7 +71,7 @@ main {
     display: flex;
 
     min-height: calc(100svh - var(--header-height));
-    overflow-y: auto;
+    /* overflow-y: auto; */
     width: 100%;
 }
 
@@ -255,5 +255,51 @@ footer {
         display: inline-block;
         min-width: 40px;
         padding-right: 10px;
+    }
+}
+
+/* ---- preview area ------------ */
+.cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: #0000009c;
+}
+
+.preview_area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 95%;
+
+    & > iframe {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+#cover_close_btn {
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    background: transparent;
+    border-radius: 50%;
+    text-align: center;
+    align-content: center;
+    border: none;
+
+    margin: 10px;
+
+    &:hover {
+        background: #ffffff86;
+        transition: all 0.5s;
     }
 }

@@ -13,7 +13,7 @@ $path = '../output';
 if( is_writable($path) ) {
 
 // ファイルを書き込みモードで開く
-$file_handle = fopen( $path."/data.html", "w");
+$file_handle = fopen( $path."/data.php", "w");
 
 $html = $html_contents['data'];
 // ファイルへデータを書き込み

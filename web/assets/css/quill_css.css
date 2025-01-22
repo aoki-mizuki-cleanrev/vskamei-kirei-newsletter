@@ -31,7 +31,18 @@ section {
 .quill-iframe {
     border: none;
     max-width: 100%;
+}
+
+.quill-iframe-yt {
     aspect-ratio: 16/9;
+}
+
+#toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+
+    background: #ffffffa4;
 }
 
 /* ツールバーボタンのスタイル調整（オプション） */
@@ -71,6 +82,20 @@ section {
 
 #toc-container ul li a:hover {
     text-decoration: underline;
+}
+
+.form-checkbox {
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1/1;
+    margin-bottom: 0.5rem;
+    /* display: block; */
+}
+
+.mb-3.aspect {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* フォントサイズクラスの定義 */

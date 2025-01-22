@@ -1,4 +1,6 @@
 // ql-editor ql-blank
+import { display_control } from "./common.js";
+
 export function concat_html(hero_title, hero_bg, toc_content, editor_contents, footer_content) {
     const meta_html = `<!DOCTYPE html>
     <html lang="ja">
@@ -18,7 +20,15 @@ export function concat_html(hero_title, hero_bg, toc_content, editor_contents, f
     <img class="part_hero__background" src="${hero_bg}" alt="">
     <pre class="parts_hero__title" style="border: none;">${hero_title}</pre></div>`;
 
-    let body_html = `<body> ${hero_content}<div style="padding: 50px 4%"> ${toc_content} <hr class="ql-hr" style="margin: 50px 0"> ${editor_contents}</div> ${footer_content}</body>`;
+    let body_html = `<body>
+    ${hero_content}
+    <div style="padding: 50px 4%">
+        ${toc_content}
+        <hr class="ql-hr" style="margin: 50px 0">
+        ${editor_contents}
+    </div>
+    ${footer_content}
+    </body>`;
 
     console.log(body_html);
     return meta_html + body_html;
@@ -43,9 +53,22 @@ export function create_page(html_data) {
         })
         .then((data) => {
             console.log(data);
-            if (confirm(`出力先URL：${data} \n ジャンプしますか？`)) {
-                location.href = data;
-            }
+            // if (confirm(`出力先URL：${data} \n ジャンプしますか？`)) {
+            //     window.open(data, "_blank");
+            // }
+            fetch("./web/components/preview.php")
+                .then((res) => {
+                    if (res.ok) {
+                        return res.text();
+                    } else {
+                        throw new Error("Network response was not ok");
+                    }
+                })
+                .then((preview_html) => {
+                    document.querySelector(".cover").outerHTML = preview_html;
+                    display_control(".cover");
+                })
+                .catch((er) => console.error("error!", er));
         })
         .catch((er) => {
             console.error("error!", er);

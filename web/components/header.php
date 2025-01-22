@@ -9,7 +9,7 @@
                 <li><button type="button">icon</button></li>
                 <li><button type="button">icon</button></li>
                 <li><button type="button">icon</button></li>
-                <li><button type="button">icon</button></li>
+                <li><button type="button" class="btn btn-info" id="preview_btn">PREVIEW</button></li>
                 <li><button type="button" class="btn btn-primary" id="save_btn">SAVE</button></li>
             </ul>
         </nav>
