@@ -83,7 +83,7 @@ header {
         width: 100%;
         font-size: 18px;
 
-        padding: 20px 30px;
+        padding: 10px 30px;
     }
 }
 
@@ -145,6 +145,11 @@ pre.parts_hero__title {
     font-weight: 700;
     font-style: normal;
     line-height: 96px;
+}
+/* --------------- */
+
+.wrapper {
+    padding: 50px 4%;
 }
 
 footer {

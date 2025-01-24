@@ -1,3 +1,8 @@
+<?php
+// エラーを出力する
+ini_set('display_errors', "On");
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -14,12 +19,21 @@
               href='https://use.fontawesome.com/releases/v6.6.0/css/all.css'
               rel='stylesheet'
             />
-
     </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S99QLCYNP9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S99QLCYNP9');
+    </script>
+
     <body>
         <?php include('./web/components/header.php') ?>
         <main>
             <div class="display_area">
+                <p><?php include('./backend/view_counter.php') ?></p> 
                 <!--  -->
                 <div class="insert_area">
                     <?php include('./web/components/hero.php') ?>

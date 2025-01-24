@@ -1,29 +1,28 @@
-<?php 
-$path = "../public_pages";
-$files = glob($path.'/*.php');
-// print_r($files);
-
-// ファイル作成時刻順でソートするためのコールバック関数
-$sort_by_last_modify = function($a, $b){
-    return filemtime($b) - filemtime($a);
-};
-// ファイル作成時刻順でソート
-usort($files, $sort_by_last_modify);
+<?php
+// エラーを出力する
+ini_set('display_errors', "On");
 ?>
 
 <!DOCTYPE html>
     <html lang="ja">
     <head>
         <meta charset="UTF-8" />
-        <title>KIREI通信
-2025.03
-vol.xx</title>
+        <title>2025年3月号 | KIREI通信</title>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Quillのスタイルシート -->
         
         <link href="../web/assets/css/webpage.css" rel="stylesheet" />
     </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S99QLCYNP9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S99QLCYNP9');
+    </script>
+
     <body>
     <header>
         <div class="header_container">
@@ -31,16 +30,7 @@ vol.xx</title>
         </div>
     </header>
     <nav class="burger_menu">
-    <?php 
-        echo '<ul class="burger_menu_list">';
-        echo '<li style="text-align: center">アーカイブ</li>';
-        foreach ($files as $i) {
-            print_r('<li><a href='.$i.'>');
-            print_r(str_replace($path.'/', '', str_replace('.php', '', $i)));
-            echo '</a></li>';
-        }
-        echo '</ul>';
-    ?>
+    <?php include('../site_list.php') ?>
     <!-- <iframe src="./site_list.php" frameborder="0"></iframe> -->
 
     </nav>
@@ -50,7 +40,7 @@ vol.xx</title>
     <pre class="parts_hero__title" style="border: none;">KIREI通信
 2025.03
 vol.xx</pre></div>
-    <div style="padding: 50px 4%">
+    <div class="wrapper">
         
             <h3>目次</h3>
             <ul id="toc-list"><li style="margin-left: 0px;"><a href="#heading-0">●メディア速報</a></li><li style="margin-left: 0px;"><a href="#heading-1"><br></a></li><li style="margin-left: 0px;"><a href="#heading-2">●売上速報</a></li><li style="margin-left: 20px;"><a href="#heading-3"><br></a></li><li style="margin-left: 20px;"><a href="#heading-4">9月　売上ランキング</a></li><li style="margin-left: 0px;"><a href="#heading-5"><br></a></li><li style="margin-left: 0px;"><a href="#heading-6">●開業閉店情報</a></li><li style="margin-left: 20px;"><a href="#heading-7"><br></a></li><li style="margin-left: 20px;"><a href="#heading-8">開業情報</a></li></ul>
@@ -65,4 +55,6 @@ vol.xx</pre></div>
             <li><span>MAIL</span> value-support@cleanrevolution.jp</li>
         </ul>
     </footer>
+
+    <script src="../web/assets/js/webpage.js"></script>
     </body>

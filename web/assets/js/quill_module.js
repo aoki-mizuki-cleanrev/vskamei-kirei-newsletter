@@ -366,13 +366,14 @@ document.addEventListener("DOMContentLoaded", function() {
      * プレビューボタンのイベントリスナー
      */
     function outputFileHandler(isPreview) {
+        const page_title = document.querySelector("#page_title").value;
         const hero_title = document.querySelector("#parts_hero__title").value;
         const hero_bg = document.querySelector(".part_hero__background").src;
         const top = document.querySelector("#toc-container").innerHTML;
         const content = quill.root.innerHTML;
         const footer = document.querySelector("footer").outerHTML;
 
-        const concat = concat_html(hero_title, hero_bg, top, content, footer);
+        const concat = concat_html(page_title, hero_title, hero_bg, top, content, footer);
         // console.log(concat);
         if (isPreview == true) {
             const data = create_page(concat).then((preview_html) => {
@@ -394,11 +395,15 @@ document.addEventListener("DOMContentLoaded", function() {
      * 保存ボタンのイベントリスナー
      */
     document.querySelector("#save_btn").addEventListener("click", () => {
-        const title = document
-            .querySelector("#parts_hero__title")
-            .value.replace(/\r?\n/g, "")
-            .replace(/\./g, "_")
-            .replace("KIREI通信", "KIREI-NewsLetter_");
+        // const title = document
+        //     .querySelector("#parts_hero__title")
+        //     .value.replace(/\r?\n/g, "")
+        //     .replace(/\./g, "_")
+        //     .replace("KIREI通信", "KNL_");
+
+        const _title = document.querySelector("#parts_hero__title").value;
+        _title.split("\n");
+        const title = "KNL_" + _title.split("\n")[1] + "_" + _title.split("\n")[2];
 
         console.log("保存！");
         const post_data = {

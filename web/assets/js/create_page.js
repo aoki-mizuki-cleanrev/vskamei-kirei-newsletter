@@ -1,17 +1,25 @@
 // ql-editor ql-blank
 import { display_control } from "./common.js";
 
-export function concat_html(hero_title, hero_bg, toc_content, editor_contents, footer_content) {
+export function concat_html(page_title, hero_title, hero_bg, toc_content, editor_contents, footer_content) {
     const meta_html = `<!DOCTYPE html>
     <html lang="ja">
     <head>
         <meta charset="UTF-8" />
-        <title>${hero_title}</title>
+        <title>${page_title} | KIREI通信</title>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Quillのスタイルシート -->
         <link href="../web/assets/css/webpage.css" rel="stylesheet" />
     </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S99QLCYNP9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S99QLCYNP9');
+    </script>
     `;
 
     const hero_content = `<div class="parts_hero">
@@ -20,7 +28,7 @@ export function concat_html(hero_title, hero_bg, toc_content, editor_contents, f
 
     let body_html = `<body>
     ${hero_content}
-    <div style="padding: 50px 4%">
+    <div class="wrapper">
         ${toc_content}
         <hr class="ql-hr" style="margin: 50px 0">
         ${editor_contents}
