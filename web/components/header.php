@@ -2,7 +2,7 @@
     <div class="header_container">
         <div class="row_wrapper">
             <div class="logo">logo</div>
-            <input type="text" value="title" id="page_title">
+            <input type="text" value="yyyy年m号" id="page_title">
         </div>
         <nav class="header_nav">
             <ul class="header_nav_list">
