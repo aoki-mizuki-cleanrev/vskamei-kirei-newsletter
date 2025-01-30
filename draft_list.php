@@ -5,7 +5,7 @@ ini_set('display_errors', "On");
 
 <?php 
 // $path = "./public_pages";
-$path = __DIR__.'/public_pages';
+$path = __DIR__.'/draft_pages';
 $files = glob($path.'/*.php');
 
 function extraction_date_vol($str) {
@@ -46,7 +46,7 @@ usort($files, $sort_by_vol);
 
 $yyyy = array();
 foreach ($files as $index => $value) {
-    $filepath = str_replace('/var/www/html/vskamei-kirei-newsletter/public_pages/', './',$value);
+    $filepath = str_replace('/var/www/html/vskamei-kirei-newsletter/draft_pages/', './',$value);
     $route = explode("/", $filepath);
     $_temp = [];
     // ファイル名から年を取得

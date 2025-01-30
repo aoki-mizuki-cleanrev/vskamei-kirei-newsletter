@@ -1,3 +1,33 @@
+const burger_box = document.querySelector(".burger_box");
+const burger_menu = document.querySelector(".burger_menu");
+
+// burgerメニュー：開閉
+burger_box.addEventListener("click", () => {
+    if (burger_box.matches(".clicked")) {
+        burger_box.classList.remove("clicked");
+        burger_menu.classList.remove("clicked");
+    } else {
+        burger_box.classList.add("clicked");
+        burger_menu.classList.add("clicked");
+    }
+});
+
+// burgerメニュー：違うとこ押して閉じるように
+document.addEventListener("click", (e) => {
+    if (
+        !e.target.matches(".burger_box") &&
+        !e.target.matches(".burger_img") &&
+        !e.target.matches(".menu_year_title") &&
+        !e.target.matches(".menu_year_item") &&
+        document.querySelector(".burger_menu.clicked")
+    ) {
+        burger_box.classList.remove("clicked");
+        burger_menu.classList.remove("clicked");
+        // アコーディオン閉じ
+        document.querySelector(".menu_year_list.clicked").classList.remove("clicked");
+    }
+});
+
 function burger_menu_fetch() {
     return fetch("../site_list.php")
         .then((res) => {
@@ -8,76 +38,50 @@ function burger_menu_fetch() {
             }
         })
         .then((json_data) => {
-            console.log(json_data);
-            return json_data;
+            const sorted_keys = Object.keys(json_data).sort((a, b) => {
+                // "yyyy" のような文字列を後ろにする
+                const numA = isNaN(a) ? -Infinity : parseInt(a, 10);
+                const numB = isNaN(b) ? -Infinity : parseInt(b, 10);
+                return numB - numA; // 降順ソート
+            });
+            // 順序性確保のため、Mapを使用
+            const sorted_data = new Map(sorted_keys.map((key) => [key, json_data[key]]));
+            return sorted_data;
         })
         .catch((er) => {
             console.error("error!", er);
         });
 }
+function generate_page_title(str) {
+    const year = str.split("_")[1].split(".")[0];
+    const month = str.split("_")[1].split(".")[1];
+    return year + "年" + month + "月号";
+}
+menu_html = "<ul class='menu_list'>";
 burger_menu_fetch().then((list) => {
     // YEAR取り出し
-    let year_arr = [];
-    list.map((item, index, array) => {
-        route_split = item.split("/");
-        filename = route_split[route_split.length - 1];
-        yyyy = filename.split("_")[1].split(".")[0];
-        year_arr.push(item);
-        // console.log(typeof year_arr[yyyy]);
-        // year_arr[yyyy].push(item);
-        console.log(index);
+    [...list].map((key, index, arr) => {
+        menu_html += `<li><dl><dt class='menu_year_title'> ${key[0]} </dt><dd class='menu_year_list'>`;
+        key[1].map((value) => {
+            menu_html += `<a href="${value}" class='menu_year_item'>${generate_page_title(value)}</a>`;
+        });
+        menu_html += "</dd></dl></li>";
     });
+    burger_menu.innerHTML = menu_html;
 
-    // ユニークYEAR
-    console.log(year_arr);
-    // year_arr_uniq = [...new Set(year_arr)];
-
-    //     let html = "<ul>";
-    //     year_arr_uniq.map((y) => {
-    //         html += `<li>sssss ${y} </li>`;
-    //     });
-
-    //     list.map((key) => {});
+    // アコーディオンメニュー開閉ロジック
+    document.addEventListener("click", (e) => {
+        if (e.target.matches(".menu_year_title")) {
+            _temp = e.target.nextElementSibling;
+            if (e.target.closest(".menu_list").querySelectorAll(".clicked")[0]) {
+                e.target
+                    .closest(".menu_list")
+                    .querySelectorAll(".clicked")
+                    .forEach((item) => {
+                        item.classList.remove("clicked");
+                    });
+            }
+            e.target.nextElementSibling.classList.toggle("clicked");
+        }
+    });
 });
-
-// TODO: 2025-01-23 17:55:15 こんな構造でアコーディオンボタンを作る↓
-{
-    /* <ul>
-    <li>
-        <dl>
-            <dt>2024</dt>
-            <dd>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-            </dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>2024</dt>
-            <dd>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-            </dd>
-        </dl>
-    </li>
-    <li>
-        <dl>
-            <dt>2024</dt>
-            <dd>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-            </dd>
-        </dl>
-    </li>
-
-    <li>2025</li>
-    <li>2026</li>
-</ul> */
-}

@@ -7,7 +7,7 @@ import { concat_html, create_page } from "./create_page.js";
 // });
 
 // ---------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const Quill = window.Quill;
     const Embed = Quill.import("blots/embed");
     const BlockEmbed = Quill.import("blots/block/embed");
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 container: "#toolbar",
                 handlers: {
                     // セグメント線（hr）の挿入ハンドラー
-                    hr: function() {
+                    hr: function () {
                         const range = quill.getSelection(true);
                         quill.insertEmbed(range.index, "hr", true, Quill.sources.USER);
                         quill.setSelection(range.index + 1, Quill.sources.SILENT);
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
     /**
      * selection-change イベントでカーソル位置を保存
      */
-    quill.on("selection-change", function(range, oldRange, source) {
+    quill.on("selection-change", function (range, oldRange, source) {
         if (range && range.index !== null) {
             savedRange = range;
         }
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const generateTOCButton = document.getElementById("generate-toc");
     const insertHrButton = document.getElementById("insert-hr"); // セグメント線挿入ボタン
 
-    insertIframeButton.addEventListener("click", function() {
+    insertIframeButton.addEventListener("click", function () {
         // モーダルのタイトルを更新（必要に応じて）
         document.getElementById("insertModalLabel").innerText = "Iframeを挿入";
         // 挿入タイプを設定
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
         insertModal.show();
     });
 
-    insertHrButton.addEventListener("click", function() {
+    insertHrButton.addEventListener("click", function () {
         const range = quill.getSelection(true);
         quill.insertEmbed(range.index, "hr", true, Quill.sources.USER);
         quill.setSelection(range.index + 1, Quill.sources.SILENT);
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const a = document.createElement("a");
             a.href = `#${id}`;
             a.innerText = text;
-            a.addEventListener("click", function(e) {
+            a.addEventListener("click", function (e) {
                 e.preventDefault();
                 document.getElementById(id).scrollIntoView({ behavior: "smooth" });
             });
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
         tocContainer.style.display = headings.length > 0 ? "block" : "none";
     }
 
-    generateTOCButton.addEventListener("click", function() {
+    generateTOCButton.addEventListener("click", function () {
         generateTOC();
     });
 
@@ -213,14 +213,12 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             document.querySelector("#iframe-height").disabled = false;
         }
-
-        console.log("checkしたよ");
     });
 
     /**
      * 挿入フォームの送信イベントハンドラー
      */
-    insertForm.addEventListener("submit", function(e) {
+    insertForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const type = insertTypeInput.value;
 
@@ -374,7 +372,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const footer = document.querySelector("footer").outerHTML;
 
         const concat = concat_html(page_title, hero_title, hero_bg, top, content, footer);
-        // console.log(concat);
         if (isPreview == true) {
             const data = create_page(concat).then((preview_html) => {
                 document.querySelector(".cover").outerHTML = preview_html;
@@ -413,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         create_page(concat)
             .then((data) => {
-                fetch("./backend/create_public_site.php", {
+                fetch("./backend/process_draft_page.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "Application/json",
@@ -428,7 +425,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     })
                     .then((data) => {
-                        console.log(data);
+                        if (confirm(`新しいページが作成されました：\n${data}\n開きますか？`)) {
+                            window.open(data, "_blank");
+                        }
                     });
             })
             .catch((er) => {
@@ -442,7 +441,7 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     const sizeSelect = document.querySelector(".ql-size");
 
-    sizeSelect.addEventListener("change", function() {
+    sizeSelect.addEventListener("change", function () {
         const selectedValue = this.value;
         if (selectedValue === "custom") {
             const customSize = prompt("カスタムフォントサイズをpxで入力してください:", "16px");
@@ -480,7 +479,7 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     const colorSelect = document.querySelector(".ql-color");
 
-    colorSelect.addEventListener("change", function() {
+    colorSelect.addEventListener("change", function () {
         const selectedValue = this.value;
         if (selectedValue === "custom") {
             const customColor = prompt("カスタムカラーを16進数で入力してください（例: #ff0000）:", "#000000");

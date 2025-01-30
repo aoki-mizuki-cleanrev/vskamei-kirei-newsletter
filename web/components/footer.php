@@ -4,5 +4,4 @@
             <li><span>TEL</span> 03-6432-4056</li>
             <li><span>MAIL</span> value-support@cleanrevolution.jp</li>
         </ul>
-    </div>
 </footer>

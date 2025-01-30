@@ -20,6 +20,7 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
     gtag('js', new Date());
     gtag('config', 'G-S99QLCYNP9');
     </script>
+    <script src="../web/assets/js/webpage.js" defer></script>
     `;
 
     const hero_content = `<div class="parts_hero">
@@ -27,6 +28,15 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
     <pre class="parts_hero__title" style="border: none;">${hero_title}</pre></div>`;
 
     let body_html = `<body>
+    <header>
+    <div class="header_container">
+        <div class="burger_box"><img src="../web/assets/img/cr_logo_motif_r.png" class="burger_img" alt=""></div>
+    </div>
+    </header>
+    <nav class="burger_menu">
+    <?php include('../site_list.php') ?>
+    </nav>
+
     ${hero_content}
     <div class="wrapper">
         ${toc_content}
@@ -36,7 +46,6 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
     ${footer_content}
     </body></html>`;
 
-    console.log(body_html);
     return meta_html + body_html;
 }
 
@@ -58,8 +67,8 @@ export function create_page(html_data) {
             }
         })
         .then((data) => {
-            console.log(data);
-            // if (confirm(`出力先URL：${data} \n ジャンプしますか？`)) {
+            // console.log(data);
+            // if (confirm(`新しいページが作成されました：\n${data}\n開きますか？`)) {
             //     window.open(data, "_blank");
             // }
             return fetch("./web/components/preview.php").then((res) => {

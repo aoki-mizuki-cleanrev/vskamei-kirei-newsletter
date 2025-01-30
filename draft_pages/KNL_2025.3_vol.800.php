@@ -1,6 +1,7 @@
 <?php
 // エラーを出力する
 ini_set('display_errors', "On");
+// require('../backend/auth.php');
 ?>
 
 <!DOCTYPE html>

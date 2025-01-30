@@ -33,16 +33,28 @@ ini_set('display_errors', "On");
         <?php include('./web/components/header.php') ?>
         <main>
             <div class="display_area">
-                <p><?php include('./backend/view_counter.php') ?></p> 
                 <!--  -->
-                <div class="insert_area">
+                <div class="edit_area" style='display: none;'>
                     <?php include('./web/components/hero.php') ?>
                     <?php include('./web/components/quill_editer.php') ?>
                     <?php include('./web/components/footer.php') ?>
                 </div>
-                
-                <!--  -->
-                <textarea name="" id="page_html" style="display: none"></textarea>
+
+                <div class="page_control_area">
+                    <div class="page_list_container">
+                        <p>公開中</p>
+                        <div id="public_area">
+                            <p style="color:#9b9797;">公開ページはありません</p>
+                        </div>
+                        <hr>
+                        <p>下書き/非公開</p>
+                        <div id="draft_area">
+                            <p style="color:#9b9797;">下書き/非公開ページはありません</p>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </main>
         <?php include('./web/components/preview.php') ?>
