@@ -383,8 +383,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // const saveButton = document.getElementById("save_btn");
-
     // プレビュー表示のトリガー
     document.querySelector("#preview_btn").addEventListener("click", () => outputFileHandler(true));
 
@@ -392,13 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * 保存ボタンのイベントリスナー
      */
     document.querySelector("#save_btn").addEventListener("click", () => {
-        // const title = document
-        //     .querySelector("#parts_hero__title")
-        //     .value.replace(/\r?\n/g, "")
-        //     .replace(/\./g, "_")
-        //     .replace("KIREI通信", "KNL_");
-
-        const _title = document.querySelector("#parts_hero__title").value;
+        const _title = document.querySelector("#parts_hero__title").value.replaceAll("_", "");
         _title.split("\n");
         const title = "KNL_" + _title.split("\n")[1] + "_" + _title.split("\n")[2];
 
@@ -425,12 +417,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     })
                     .then((data) => {
-                        if (confirm(`新しいページが作成されました：\n${data}\n開きますか？`)) {
-                            window.open(data, "_blank");
-                        }
+                        // if (confirm(`新しいページが作成されました：\n${data}\n開きますか？`)) {
+                        //     window.open(data, "_blank");
+                        // }
+
+                        // topへ
+                        window.location.href = this.location;
                     });
             })
             .catch((er) => {
+                alert("保存に失敗しました＞＜");
                 console.error("error!!", er);
                 throw er;
             });

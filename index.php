@@ -34,21 +34,23 @@ ini_set('display_errors', "On");
         <main>
             <div class="display_area">
                 <!--  -->
-                <div class="edit_area" style='display: none;'>
+                <div class="edit_area hidden edit_gr">
                     <?php include('./web/components/hero.php') ?>
                     <?php include('./web/components/quill_editer.php') ?>
                     <?php include('./web/components/footer.php') ?>
                 </div>
 
-                <div class="page_control_area">
+                <div class="page_control_area control_gr">
                     <div class="page_list_container">
-                        <p>公開中</p>
+                        <p class="page_list_title"><i class="fa-solid fa-lock-open"></i> 公開中</p>
                         <div id="public_area">
+                            <!-- insert here -->
                             <p style="color:#9b9797;">公開ページはありません</p>
                         </div>
-                        <hr>
-                        <p>下書き/非公開</p>
+                        <hr style="margin: 1.5rem 0;">
+                        <p class="page_list_title"><i class="fa-solid fa-lock"></i> 下書き/非公開</p>
                         <div id="draft_area">
+                            <!-- insert here -->
                             <p style="color:#9b9797;">下書き/非公開ページはありません</p>
                         </div>
 
@@ -63,7 +65,7 @@ ini_set('display_errors', "On");
         <!-- Bootstrap JSと依存関係 -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Quillライブラリ -->
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script src="https://cdn.quilljs.com/latest/quill.js"></script>
         <script src="./web/assets/js/quill_module.js" type="module"></script>
         <script src="./web/assets/js/index.js"></script>
     </body>

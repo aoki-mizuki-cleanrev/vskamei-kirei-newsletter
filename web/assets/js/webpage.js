@@ -6,6 +6,7 @@ burger_box.addEventListener("click", () => {
     if (burger_box.matches(".clicked")) {
         burger_box.classList.remove("clicked");
         burger_menu.classList.remove("clicked");
+        document.querySelector(".menu_year_list.clicked").classList.remove("clicked");
     } else {
         burger_box.classList.add("clicked");
         burger_menu.classList.add("clicked");
@@ -61,12 +62,15 @@ menu_html = "<ul class='menu_list'>";
 burger_menu_fetch().then((list) => {
     // YEAR取り出し
     [...list].map((key, index, arr) => {
-        menu_html += `<li><dl><dt class='menu_year_title'> ${key[0]} </dt><dd class='menu_year_list'>`;
+        menu_html += `<li><dl><dt class='menu_year_title'>${key[0]}年</dt><dd class='menu_year_list'>`;
         key[1].map((value) => {
             menu_html += `<a href="${value}" class='menu_year_item'>${generate_page_title(value)}</a>`;
         });
         menu_html += "</dd></dl></li>";
     });
+    if ([...list].length === 0) {
+        menu_html = "<li style='padding:10px 4%'>公開しているページはありません</li>";
+    }
     burger_menu.innerHTML = menu_html;
 
     // アコーディオンメニュー開閉ロジック

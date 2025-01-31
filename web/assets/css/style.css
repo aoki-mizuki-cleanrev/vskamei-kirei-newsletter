@@ -41,7 +41,7 @@ header {
 
 .header_container {
     height: 100%;
-    padding: 0 max(1%, 16px);
+    padding: 0 max(2%, 16px);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -49,6 +49,11 @@ header {
     justify-content: space-between;
 }
 
+#page_title {
+    padding: 2px 10px;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+}
 /* @media screen and (width < 675px) {
     .header_container {
         flex-direction: column;
@@ -76,6 +81,9 @@ header {
     & > a > img {
         width: 90%;
         height: auto;
+    }
+    &:hover > a > img {
+        padding: 1px;
     }
 }
 
@@ -124,7 +132,17 @@ main {
 }
 
 .page_list_container {
-    padding: 10px 4%;
+    padding: 15px 3%;
+}
+
+@media screen and (width < 765px) {
+    .page_list_container {
+        padding: 15px max(2%, 16px);
+    }
+}
+
+.page_list_title {
+    font-size: 20px;
 }
 
 .page_list {
@@ -137,22 +155,77 @@ main {
     & > li {
         margin: 2.5px 0;
         padding: 5px 10px;
-        border-radius: 3px;
+        /* border-radius: 5px; */
         display: flex;
         gap: 20px;
         cursor: pointer;
+        font-size: 18px;
+        color: #253a92;
+        align-items: center;
     }
     & > li:hover {
-        background: #f7646471;
-        transition: all 0.2s;
+        background: #253b922b;
+        transition: all 0.3s;
     }
 }
 .btn_wrapper {
     margin-left: auto;
-    padding: 0 20px;
+    padding: 0 0 0 2%;
+    display: flex;
+    gap: 15px;
 }
 
 .public.page_list {
+}
+
+.switch_btn,
+.watch_btn,
+.delete_btn {
+    padding: 1px 10px;
+    border-radius: 5px;
+    border: 2px solid currentColor;
+    font-weight: 500;
+    background: #fff;
+}
+
+.be_private {
+    color: #5d5d5d;
+    &:hover {
+        border: 2px solid transparent;
+        background: #5d5d5d;
+        color: #fff;
+        transition: all 0.2s;
+    }
+}
+.be_public {
+    color: #5c1bd4;
+    &:hover {
+        border: 2px solid transparent;
+        background: #5c1bd4;
+        color: #fff;
+        transition: all 0.2s;
+    }
+}
+
+.watch_btn {
+    background: #333;
+    border: #000 2px solid;
+    color: #fff;
+
+    &:hover {
+        background: color-mix(in srgb, #333, #000 30%);
+    }
+}
+
+.delete_btn {
+    color: rgb(227, 68, 68);
+
+    &:hover {
+        background: rgb(218, 44, 44);
+        border: 2px solid transparent;
+        color: #fff;
+        transition: all 0.2s;
+    }
 }
 
 /* .sidenav {
@@ -345,7 +418,7 @@ footer {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #cover_close_btn {
@@ -357,8 +430,11 @@ footer {
     text-align: center;
     align-content: center;
     border: none;
-
     margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8;
 
     &:hover {
         background: #ffffff86;

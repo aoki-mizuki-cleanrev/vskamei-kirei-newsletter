@@ -6,10 +6,10 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
     <html lang="ja">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${page_title} | KIREI通信</title>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <!-- Quillのスタイルシート -->
         <link href="../web/assets/css/webpage.css" rel="stylesheet" />
     </head>
     <!-- Google tag (gtag.js) -->
@@ -39,9 +39,13 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
 
     ${hero_content}
     <div class="wrapper">
+        <div class="top_area">
         ${toc_content}
+        </div>
         <hr class="ql-hr" style="margin: 50px 0">
+        <div class="contents_area">
         ${editor_contents}
+        </div>
     </div>
     ${footer_content}
     </body></html>`;
