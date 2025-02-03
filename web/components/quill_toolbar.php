@@ -1,5 +1,5 @@
- <!-- ツールバー -->
- <div id="toolbar">
+<!-- ツールバー -->
+<div id="toolbar">
             <!-- 基本的な書式 -->
             <button class="ql-bold" title="太字"></button>
             <button class="ql-italic" title="斜体"></button>
@@ -74,4 +74,4 @@
 
             <!-- 目次生成 -->
             <button id="generate-toc" title="目次を生成"><img src="./web/assets/icon/ico_toc.svg" style="width:100%; height: 100%;" alt="icon"></button>
-        </div>
+</div>

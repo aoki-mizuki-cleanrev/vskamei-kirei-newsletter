@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tocContainer = document.getElementById("toc-container");
         tocContainer.style.display = headings.length > 0 ? "block" : "none";
     }
-
+    // 目次生成
     generateTOCButton.addEventListener("click", function () {
         generateTOC();
     });
@@ -206,14 +206,31 @@ document.addEventListener("DOMContentLoaded", function () {
         return iframe.getAttribute("src");
     }
 
-    // アスペクト比チェックイベントハンドラー
-    aspectRatioCheckbox.addEventListener("change", () => {
-        if (aspectRatioCheckbox.checked) {
-            document.querySelector("#iframe-height").disabled = true;
+    function googleDriveFilter(url) {
+        if (url.indexOf("/drive/folders") >= 0) {
+            const _temp = url.split("/");
+            const ID = _temp[_temp.length - 1].indexOf("?") > 0 ? _temp[_temp.length - 1].split("?")[0] : _temp[_temp.length - 1];
+            const tagByFolder = `<iframe src="https://drive.google.com/embeddedfolderview?id=${ID}#grid" style="width:100%; height:600px; border:0;"></iframe>`;
+            console.log("folder判定");
+            return tagByFolder;
+        } else if (url.indexOf("drive.google.com/file/") >= 0) {
+            const src = url.indexOf("/view?usp=sharing") ? url.replace("/view?usp=sharing", "/preview?authuser=0") : url;
+            const tagByFile = `<iframe src=${src}></iframe>`;
+            console.log("file判定");
+            return tagByFile;
         } else {
-            document.querySelector("#iframe-height").disabled = false;
+            return url;
         }
-    });
+    }
+
+    // アスペクト比チェックイベントハンドラー
+    // aspectRatioCheckbox.addEventListener("change", () => {
+    //     if (aspectRatioCheckbox.checked) {
+    //         document.querySelector("#iframe-height").disabled = true;
+    //     } else {
+    //         document.querySelector("#iframe-height").disabled = false;
+    //     }
+    // });
 
     /**
      * 挿入フォームの送信イベントハンドラー
@@ -221,26 +238,32 @@ document.addEventListener("DOMContentLoaded", function () {
     insertForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const type = insertTypeInput.value;
-
         if (type === "iframe") {
-            const iframeTag = document.getElementById("iframe-url").value.trim();
-            const iframeWidth = document.getElementById("iframe-width").value.trim();
-            let iframeHeight = document.getElementById("iframe-height").value.trim();
-            const hasCheckedAspectRatio = document.getElementById("iframe-aspect").checked;
+            const iframeTag = document.getElementById("iframe-tag").value.trim();
+            const iframeURL = document.getElementById("iframe-url").value.trim();
+            // VALIDATION: isEmpty
+            if (iframeTag == "" && iframeURL == "") {
+                return;
+            }
+
+            // const iframeWidth = document.getElementById("iframe-width").value.trim();
+            // let iframeHeight = document.getElementById("iframe-height").value.trim();
+            // const hasCheckedAspectRatio = document.getElementById("iframe-aspect").checked;
             let extraClass;
 
-            if (hasCheckedAspectRatio) {
-                extraClass = "quill-iframe-yt";
-                iframeHeight = "auto";
-            }
-            // const iframeHeight = "auto";
+            // As YouTube
+            // if (hasCheckedAspectRatio) {
+            extraClass = "quill-iframe-yt";
+            // iframeHeight = "auto";
+            // }
 
             // src属性取り出し
-            const iframeUrl = getSrc(iframeTag);
+            const src = iframeTag != "" ? iframeTag : iframeURL;
+            const iframeSrc = getSrc(googleDriveFilter(src));
 
             // URLの簡単なバリデーション
             const iframeUrlPattern = /^(https?:\/\/)/i;
-            if (!iframeUrlPattern.test(iframeUrl)) {
+            if (!iframeUrlPattern.test(iframeSrc)) {
                 alert("有効なURLを入力してください。");
                 return;
             }
@@ -256,17 +279,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 index,
                 "iframe",
                 {
-                    src: iframeUrl,
-                    width: iframeWidth,
-                    height: iframeHeight,
+                    src: iframeSrc,
+                    // width: iframeWidth,
+                    // height: iframeHeight,
                     classList: extraClass,
                 },
                 Quill.sources.USER
             );
 
+            // iframe の直後に改行を挿入
+            quill.insertText(index + 1, "\n", Quill.sources.USER);
+
             // カーソルをIframeの後ろに移動
-            quill.setSelection(index + 1, Quill.sources.SILENT);
+            quill.setSelection(index + 2, Quill.sources.SILENT);
         }
+
+        // CLEAR
+        document.getElementById("iframe-url").value = "";
+        document.getElementById("iframe-tag").value = "";
 
         // モーダルを閉じる
         insertModal.hide();

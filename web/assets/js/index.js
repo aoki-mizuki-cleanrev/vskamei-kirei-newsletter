@@ -55,6 +55,22 @@ hero_bg_image_input.addEventListener("change", (e) => {
     });
 });
 
+//MODAL Tab Switch
+function tabClick() {
+    let tab = document.getElementsByName("tab");
+    const bar = document.querySelector(".underbar");
+    tab.forEach((item) => {
+        if (item.checked) {
+            bar.classList.toggle("to_html");
+            the_class = "." + item.id.split("_")[0] + "_area";
+            document.querySelector(the_class).style.display = "block";
+        } else {
+            the_class = "." + item.id.split("_")[0] + "_area";
+            document.querySelector(the_class).style.display = "none";
+        }
+    });
+}
+
 // ############################################
 // ##   Page-control display
 // ############################################
@@ -64,7 +80,8 @@ const draft_area = document.querySelector("#draft_area");
 function generate_page_title(str) {
     const year = str.split("_")[1].split(".")[0];
     const month = str.split("_")[1].split(".")[1];
-    return year + "年" + month + "月号";
+    const vol = str.split("_")[2].split(".")[1];
+    return year + "年" + month + "月号 vol " + vol;
 }
 // PUBLIC
 function fetch_public() {
@@ -91,9 +108,10 @@ function fetch_public() {
             [...sorted_data].map((item) => {
                 console.log(item[1]);
                 item[1].map((file_name) => {
-                    public_html += `<li data-link="./public_pages${file_name.replace(".", "")}"> ${generate_page_title(
-                        file_name
-                    )} <div class="btn_wrapper">\
+                    public_html += `<li data-link="./public_pages${file_name.replace(
+                        ".",
+                        ""
+                    )}"> <div class="page_name">${generate_page_title(file_name)}</div> <div class="btn_wrapper">\
                     <button type="button" class="switch_btn be_private" data-link="./public_pages${file_name.replace(
                         ".",
                         ""
@@ -101,7 +119,7 @@ function fetch_public() {
                     <button type="button" class="watch_btn" onclick="window.open('./public_pages${file_name.replace(
                         ".",
                         ""
-                    )}','_blank')" >見る</button>\
+                    )}','_blank')" ><i class="fa-solid fa-eye"></i></button>\
                     </div> </li>`;
                 });
             });
@@ -141,9 +159,9 @@ function fetch_draft() {
             [...sorted_data].map((item) => {
                 console.log(item[1]);
                 item[1].map((file_name) => {
-                    draft_html += `<li data-link="./draft_pages${file_name.replace(".", "")}"> ${generate_page_title(
+                    draft_html += `<li data-link="./draft_pages${file_name.replace(".", "")}"> <div class="page_name">${generate_page_title(
                         file_name
-                    )} <div class="btn_wrapper">\
+                    )} </div><div class="btn_wrapper">\
                     <button type="button" class="delete_btn" title="削除" onclick="delete_draft('./draft_pages${file_name.replace(
                         ".",
                         ""
@@ -155,7 +173,7 @@ function fetch_draft() {
                     <button type="button" class="watch_btn" onclick="window.open('./draft_pages${file_name.replace(
                         ".",
                         ""
-                    )}','_blank')">見る</button>\
+                    )}','_blank')"><i class="fa-solid fa-eye"></i></button>\
                     </div> </li>`;
                 });
             });

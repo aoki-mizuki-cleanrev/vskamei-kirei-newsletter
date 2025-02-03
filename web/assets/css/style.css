@@ -93,9 +93,10 @@ header {
 .header_nav_list {
     display: flex;
     margin: 0;
+    gap: 15px;
 
     & > li {
-        padding: 0 10px;
+        /* padding: 0 10px; */
     }
 }
 
@@ -110,7 +111,7 @@ main {
 .display_area {
     /* height: 100%; */
     flex-grow: 1;
-    /* width: calc(100% - 250px); */
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -132,7 +133,7 @@ main {
 }
 
 .page_list_container {
-    padding: 15px 3%;
+    padding: 15px 5%;
 }
 
 @media screen and (width < 765px) {
@@ -148,31 +149,40 @@ main {
 .page_list {
     padding: 0;
     width: 100%;
-    max-height: 300px;
+    max-height: 280px;
     /* border: 1px dashed #333; */
     overflow-y: auto;
+    scrollbar-color: #ff110069 transparent;
 
     & > li {
         margin: 2.5px 0;
-        padding: 5px 10px;
+        padding: 5px 0;
         /* border-radius: 5px; */
         display: flex;
-        gap: 20px;
+        /* gap: 20px; */
         cursor: pointer;
         font-size: 18px;
         color: #253a92;
         align-items: center;
+        width: 100%;
     }
     & > li:hover {
         background: #253b922b;
         transition: all 0.3s;
+    }
+
+    .page_name {
+        /* flex-grow: 1; */
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 }
 .btn_wrapper {
     margin-left: auto;
     padding: 0 0 0 2%;
     display: flex;
-    gap: 15px;
+    gap: 10px;
 }
 
 .public.page_list {
@@ -186,6 +196,7 @@ main {
     border: 2px solid currentColor;
     font-weight: 500;
     background: #fff;
+    white-space: nowrap;
 }
 
 .be_private {
@@ -411,7 +422,7 @@ footer {
     width: 90%;
     height: 95%;
 
-    & > iframe {
+    & iframe {
         width: 100%;
         height: 100%;
     }
@@ -442,4 +453,7 @@ footer {
     }
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+.quill-iframe {
+    width: 100%;
+    height: auto;
+}

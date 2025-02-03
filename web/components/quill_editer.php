@@ -93,32 +93,46 @@
                 <div class="modal-content">
                     <form id="insert-form">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="insertModalLabel">Iframeを挿入</h5>
+                            <h5 class="modal-title" id="insertModalLabel">埋め込む</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Iframe挿入用フォーム -->
                             <div id="modal-body-content">
-                                <div class="mb-3">
-                                    <label for="iframe-url" class="form-label">Iframe Tag</label>
-                                    <input type="text" class="form-control" id="iframe-url" placeholder="<iframe width='560' height='315' src=...." required />
+                                <div class="tab_area">
+                                    <input type="radio" name="tab" class="tab_radio" id="html_tab" onclick="tabClick()" checked>
+                                    <label for="html_tab" class="tab_radio_label">HTML</label>
+                                    <input type="radio" name="tab" class="tab_radio" id="url_tab" onclick="tabClick()">
+                                    <label for="url_tab" class="tab_radio_label">URL</label>
+                                    <div class="underbar"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="iframe-width" class="form-label">幅（px）</label>
-                                    <input type="number" class="form-control" id="iframe-width" value="600" required />
+                                <div class="html_area">
+                                    <div class="mb-3">
+                                        <label for="iframe-url" class="form-label">iframe</label>
+                                        <textarea type="text" class="form-control" id="iframe-tag" placeholder="<html>コードをここに入力"></textarea>
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                        <label for="iframe-width" class="form-label">幅（px）</label>
+                                        <input type="number" class="form-control" id="iframe-width" value="600" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="iframe-height" class="form-label">高さ（px）</label>
+                                        <input type="number" class="form-control" id="iframe-height" value="400" required />
+                                    </div> -->
+                                    <!-- <div class="mb-3 aspect">
+                                        <label for="iframe-height" class="form-label">アスペクト比16:9</label>
+                                        <input type="checkbox" class="form-checkbox" id="iframe-aspect" />
+                                    </div> -->
                                 </div>
-                                <div class="mb-3">
-                                    <label for="iframe-height" class="form-label">高さ（px）</label>
-                                    <!-- <span class="form-control" style="background: #cacaca;">auto</span> -->
-                                    <input type="number" class="form-control" id="iframe-height" value="400" required />
+                                <div class="url_area">
+                                    <div class="mb-3">
+                                        <label for="iframe-url" class="form-label">URL (Google drive etc...)</label>
+                                        <input type="text" class="form-control" id="iframe-url" placeholder="URL" />
+                                    </div>
                                 </div>
-                                <div class="mb-3 aspect">
-                                    <label for="iframe-height" class="form-label">アスペクト比16:9</label>
-                                    <!-- <span class="form-control" style="background: #cacaca;">auto</span> -->
-                                    <input type="checkbox" class="form-checkbox" id="iframe-aspect" />
-                                </div>
+                                <input type="hidden" id="insert-type" value="" />
                             </div>
-                            <input type="hidden" id="insert-type" value="" />
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>

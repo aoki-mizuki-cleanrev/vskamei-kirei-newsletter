@@ -31,6 +31,8 @@ section {
 .quill-iframe {
     border: none;
     max-width: 100%;
+    min-height: 500px;
+    border: #eee 1px solid;
 }
 
 .quill-iframe-yt {
@@ -128,6 +130,11 @@ section {
     border-top: 2px solid #666;
     margin: 10px 0;
 }
+
+.ql-editor {
+    caret-color: red;
+    padding: 12px 3% !important;
+}
 .ql-snow .ql-editor h1,
 .ql-snow .ql-editor h2,
 .ql-snow .ql-editor h3 {
@@ -155,4 +162,52 @@ h1::before {
     &:hover {
         filter: brightness(0) saturate(100%) invert(26%) sepia(68%) saturate(5680%) hue-rotate(199deg) brightness(91%) contrast(100%);
     }
+}
+
+.tab_area {
+    display: flex;
+    position: relative;
+}
+
+.tab_radio {
+    display: none;
+}
+.tab_radio_label {
+    min-width: 100px;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+
+    &:hover {
+        background: #bd070740;
+        transition: all 0.3s;
+    }
+}
+.underbar {
+    height: 2px;
+    width: 100px;
+    background: #bd0707;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: left 0.6s;
+}
+.underbar.to_html {
+    left: 100px;
+    transition: left 0.6s;
+}
+
+.html_area,
+.url_area {
+    padding: 15px 10px;
+}
+
+.url_area {
+    display: none;
+}
+
+#iframe-tag {
+    height: 200px;
 }
