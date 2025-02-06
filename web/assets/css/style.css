@@ -19,6 +19,11 @@ a:hover,
 a:visited {
     color: inherit;
 }
+
+s {
+    text-decoration: line-through;
+}
+
 body {
     /* font-size: 1.6rem; */
 }
@@ -176,11 +181,12 @@ main {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding: 0 2%;
     }
 }
 .btn_wrapper {
     margin-left: auto;
-    padding: 0 0 0 2%;
+    padding: 0 2%;
     display: flex;
     gap: 10px;
 }
@@ -273,7 +279,8 @@ img.part_hero__background {
     /* filter: grayscale(90%); */
 }
 
-.parts_hero__title {
+/* .parts_hero__title { */
+.hero_title_container {
     width: 50%;
     height: 90%;
     position: absolute;
@@ -299,6 +306,10 @@ img.part_hero__background {
 
     &:hover {
         border: #eee 1px solid;
+    }
+
+    & input {
+        width: 200px;
     }
 }
 

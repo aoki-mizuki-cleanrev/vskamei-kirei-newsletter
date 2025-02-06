@@ -4,6 +4,7 @@
         <button class="ql-bold" title="太字"></button>
         <button class="ql-italic" title="斜体"></button>
         <button class="ql-underline" title="下線"></button>
+        <button class="ql-strike" title="取り消し線"></button>
         
         <!-- テキスト色変更 -->
         <select class="ql-color" title="テキストの色">

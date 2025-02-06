@@ -38,6 +38,10 @@ p {
     }
 }
 
+s {
+    text-decoration: line-through;
+}
+
 /* -------------------- */
 header {
     position: fixed;

@@ -1,5 +1,5 @@
 // ############################################
-// ##   Switch
+// ##   発行されたWEB-PAGE用のJSファイル
 // ############################################
 // 未保存で離脱防止アラート -------
 function onBeforeUnloadEvent(event) {
@@ -262,12 +262,19 @@ function extract_elems(elm) {
     const hero__title = doc.querySelector(".parts_hero__title").textContent;
     const top = doc.querySelector("#toc-list").innerHTML;
     const contents = doc.querySelector(".contents_area").innerHTML;
-    console.log(hero__title, top, contents);
+    // console.log(hero__title, top, contents);
 
     // エディターに挿入
     document.querySelector("#page_title").value = page_title.replace(" | KIREI通信", "");
     document.querySelector(".part_hero__background").src = hero__background;
-    document.querySelector(".parts_hero__title").textContent = hero__title;
+    // document.querySelector(".parts_hero__title").textContent = hero__title;
+    _title_temp = hero__title.split("\n");
+    document.querySelector("#hero_kirei").value = _title_temp[0];
+    document.querySelector("#hero_yyyy").value = _title_temp[1].split(".")[0];
+    document.querySelector("#hero_m").value = _title_temp[1].split(".")[1];
+    document.querySelector("#hero_vol").value = _title_temp[2].split(".")[1];
+    console.log(_title_temp[0], _title_temp[1].split(".")[0], _title_temp[1].split(".")[1], _title_temp[2].split(".")[1]);
+
     document.querySelector("#toc-list").innerHTML = top;
     document.querySelector(".ql-editor").classList.remove("ql-blank");
     document.querySelector(".ql-editor").innerHTML = contents;
@@ -305,7 +312,7 @@ function edit_page(url) {
 
 document.addEventListener("click", (e) => {
     // 編集画面を出すとき
-    if (e.target.matches("li")) {
+    if (e.target.matches("li") || e.target.matches(".page_name")) {
         const url = e.target.dataset.link;
         edit_page(url);
     }

@@ -1,3 +1,6 @@
+// ############################################
+// ##   発行されたWEBPAGE用のJSファイル
+// ############################################
 const burger_box = document.querySelector(".burger_box");
 const burger_menu = document.querySelector(".burger_menu");
 
@@ -64,7 +67,7 @@ burger_menu_fetch().then((list) => {
     [...list].map((key, index, arr) => {
         menu_html += `<li><dl><dt class='menu_year_title'>${key[0]}年</dt><dd class='menu_year_list'>`;
         key[1].map((value) => {
-            menu_html += `<a href="${value}" class='menu_year_item'>${generate_page_title(value)}</a>`;
+            menu_html += `<a href="${value.replace("./", "../public_pages/")}" class='menu_year_item'>${generate_page_title(value)}</a>`;
         });
         menu_html += "</dd></dl></li>";
     });
