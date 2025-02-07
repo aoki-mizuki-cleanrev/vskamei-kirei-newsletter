@@ -25,6 +25,7 @@ section {
 #editor-container {
     height: 100vh;
     font-size: 16px; /* デフォルトフォントサイズを16pxに設定 */
+    field-sizing: content;
 }
 
 /* Iframeのスタイル */
@@ -38,6 +39,7 @@ section {
 .quill-iframe-yt {
     aspect-ratio: 16/9;
     height: auto;
+    min-height: auto;
 }
 
 #toolbar {
@@ -101,6 +103,10 @@ section {
     gap: 10px;
 }
 
+.top_area {
+    font-size: 24px;
+}
+
 /* フォントサイズクラスの定義 */
 .ql-size-12px {
     font-size: 12px;
@@ -124,6 +130,16 @@ section {
     font-size: 32px;
 }
 
+.ql-align-right {
+    text-align: right;
+}
+.ql-align-justify {
+    text-align: left;
+}
+.ql-align-center {
+    text-align: center;
+}
+
 /* セグメント線（hr）のスタイル */
 .ql-hr {
     border: none;
@@ -134,6 +150,7 @@ section {
 .ql-editor {
     caret-color: red;
     padding: 12px 3% !important;
+    overscroll-behavior-y: none;
 }
 .ql-snow .ql-editor h1,
 .ql-snow .ql-editor h2,

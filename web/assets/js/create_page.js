@@ -8,6 +8,10 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${page_title} | KIREI通信</title>
+        <link href="../web/assets/css/webpage.css" rel="stylesheet" />
+        <!-- Quillのスタイルシート -->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../web/assets/css/quill_css.css">
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="../web/assets/css/webpage.css" rel="stylesheet" />

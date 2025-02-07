@@ -4,8 +4,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    list-style: none;
     text-decoration: none;
+    list-style: none;
     font-family: "Noto Sans JP", system-ui;
     font-optical-sizing: auto;
     font-weight: 600;
@@ -111,6 +111,7 @@ main {
     background: #f1f3f4;
     /* overflow-y: auto; */
     width: 100%;
+    overscroll-behavior-y: none; /* 適用される */
 }
 
 .display_area {
@@ -157,7 +158,7 @@ main {
     max-height: 280px;
     /* border: 1px dashed #333; */
     overflow-y: auto;
-    scrollbar-color: #ff110069 transparent;
+    scrollbar-color: #05136c69 transparent;
 
     & > li {
         margin: 2.5px 0;
@@ -289,6 +290,7 @@ img.part_hero__background {
     transform: translate(-50%, -50%);
 
     font-size: 80px;
+    line-height: 80px;
     color: #fff;
     background: transparent;
     border: none;
@@ -304,12 +306,37 @@ img.part_hero__background {
     font-style: normal;
     line-height: 96px;
 
-    &:hover {
-        border: #eee 1px solid;
+    & input {
+        padding: 5px 10px;
+        margin: 5px 0;
+        background: transparent;
+        color: #fff;
+        border: transparent solid 2px;
+        border-radius: 5px;
+        field-sizing: content;
+
+        outline: none;
+    }
+    & input:hover {
+        border: #eee solid 2px;
+        transition: all 0.3s;
     }
 
-    & input {
-        width: 200px;
+    & input#hero_kirei {
+        width: 100%;
+        text-align: center;
+    }
+    & input#hero_yyyy {
+        min-width: 220px;
+        max-width: 300px;
+    }
+    & input#hero_m {
+        min-width: 110px;
+        max-width: 200px;
+    }
+    & input#hero_vol {
+        min-width: 100px;
+        max-width: 200px;
     }
 }
 

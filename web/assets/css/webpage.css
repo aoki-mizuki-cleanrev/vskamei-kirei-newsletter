@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    list-style: none;
     text-decoration: none;
     font-family: "Noto Sans JP", system-ui;
     font-optical-sizing: auto;
@@ -88,6 +87,7 @@ header {
     right: 0;
     padding-top: 60px;
     transform: translateX(100%);
+    list-style: none;
 
     width: 60%;
     max-width: 400px;
@@ -114,6 +114,7 @@ header {
 
 .menu_list {
     padding: 0;
+    list-style: none;
 }
 
 dt.menu_year_title {
@@ -260,6 +261,10 @@ footer {
     background: #333;
     color: #fff;
     padding: 20px 4%;
+
+    & ul {
+        list-style: none;
+    }
 }
 
 .l_head__list {
@@ -283,4 +288,5 @@ iframe {
 .quill-iframe-yt {
     aspect-ratio: 16/9;
     height: auto;
+    min-height: 0;
 }

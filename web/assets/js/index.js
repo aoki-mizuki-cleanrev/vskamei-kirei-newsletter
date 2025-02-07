@@ -12,7 +12,7 @@ submit_btn.addEventListener("click", () => {
 });
 //  -----
 
-function editer_mode() {
+function editor_mode() {
     document.querySelectorAll(".control_gr").forEach((item) => {
         item.classList.add("hidden");
         window.removeEventListener("beforeunload", onBeforeUnloadEvent);
@@ -71,6 +71,22 @@ function tabClick() {
     });
 }
 
+// // エディタのルート要素（例：#editor）を取得
+// const editorElement = document.querySelector(".ql-editor");
+
+// pasteイベントを監視
+document.addEventListener("paste", function (e) {
+    document.body.style.overflow = "hidden";
+    console.log("paste!!!!");
+    setTimeout(() => {
+        document.body.style.overflow = "auto";
+    }, 10);
+});
+
+document.addEventListener("scroll", () => {
+    // console.log("Scroll", document.documentElement.scrollTop);
+});
+
 // ############################################
 // ##   Page-control display
 // ############################################
@@ -100,18 +116,19 @@ function fetch_public() {
                 const numB = isNaN(b) ? -Infinity : parseInt(b, 10);
                 return numB - numA; // 降順ソート
             });
+            // データの有無による表示切り替え
+            if (data.length != 0) {
+                const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
+                // console.log(sorted_data);
 
-            const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
-            // console.log(sorted_data);
-
-            let public_html = '<ul class="page_list draft">';
-            [...sorted_data].map((item) => {
-                console.log(item[1]);
-                item[1].map((file_name) => {
-                    public_html += `<li data-link="./public_pages${file_name.replace(
-                        ".",
-                        ""
-                    )}"> <div class="page_name">${generate_page_title(file_name)}</div> <div class="btn_wrapper">\
+                let public_html = '<ul class="page_list draft">';
+                [...sorted_data].map((item) => {
+                    console.log(item[1]);
+                    item[1].map((file_name) => {
+                        public_html += `<li data-link="./public_pages${file_name.replace(
+                            ".",
+                            ""
+                        )}"> <div class="page_name">${generate_page_title(file_name)}</div> <div class="btn_wrapper">\
                     <button type="button" class="switch_btn be_private" data-link="./public_pages${file_name.replace(
                         ".",
                         ""
@@ -121,11 +138,14 @@ function fetch_public() {
                         ""
                     )}','_blank')" ><i class="fa-solid fa-eye"></i></button>\
                     </div> </li>`;
+                    });
                 });
-            });
-            public_html += "</ul>";
-            public_area.innerHTML = public_html;
-            console.log(public_html);
+                public_html += "</ul>";
+                public_area.innerHTML = public_html;
+                console.log(public_html);
+            } else {
+                public_area.innerHTML = '<p style="color:#9b9797;padding:0 2%">公開ページはありません</p>';
+            }
         })
         .catch((er) => console.error("error!", er));
 }
@@ -151,17 +171,19 @@ function fetch_draft() {
                 const numB = isNaN(b) ? -Infinity : parseInt(b, 10);
                 return numB - numA; // 降順ソート
             });
+            // データの有無による表示切り替え
+            if (data.length != 0) {
+                const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
+                // console.log(sorted_data);
 
-            const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
-            // console.log(sorted_data);
-
-            let draft_html = '<ul class="page_list draft">';
-            [...sorted_data].map((item) => {
-                console.log(item[1]);
-                item[1].map((file_name) => {
-                    draft_html += `<li data-link="./draft_pages${file_name.replace(".", "")}"> <div class="page_name">${generate_page_title(
-                        file_name
-                    )} </div><div class="btn_wrapper">\
+                let draft_html = '<ul class="page_list draft">';
+                [...sorted_data].map((item) => {
+                    console.log(item[1]);
+                    item[1].map((file_name) => {
+                        draft_html += `<li data-link="./draft_pages${file_name.replace(
+                            ".",
+                            ""
+                        )}"> <div class="page_name">${generate_page_title(file_name)} </div><div class="btn_wrapper">\
                     <button type="button" class="delete_btn" title="削除" onclick="delete_draft('./draft_pages${file_name.replace(
                         ".",
                         ""
@@ -175,11 +197,14 @@ function fetch_draft() {
                         ""
                     )}','_blank')"><i class="fa-solid fa-eye"></i></button>\
                     </div> </li>`;
+                    });
                 });
-            });
-            draft_html += "</ul>";
-            draft_area.innerHTML = draft_html;
-            console.log(draft_html);
+                draft_html += "</ul>";
+                draft_area.innerHTML = draft_html;
+                console.log(draft_html);
+            } else {
+                draft_area.innerHTML = '<p style="color:#9b9797;padding:0 2%">下書き/非公開ページはありません</p>';
+            }
         })
         .catch((er) => {
             console.error("error!", er);
@@ -301,7 +326,7 @@ function edit_page(url) {
         .then((data) => {
             console.log(data);
             // エディタ表示
-            editer_mode();
+            editor_mode();
 
             extract_elems(data);
         })

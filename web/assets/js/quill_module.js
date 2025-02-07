@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const insertHrButton = document.getElementById("insert-hr");
 
     // Iframe挿入用ボタン
-    insertIframeButton.addEventListener("click", () => {
+    insertIframeButton.addEventListener("click", (e) => {
         document.getElementById("insertModalLabel").innerText = "Iframeを挿入";
         insertTypeInput.value = "iframe";
         insertModal.show();
@@ -220,9 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const iframeURL = document.getElementById("iframe-url").value.trim();
             if (iframeTag === "" && iframeURL === "") return;
 
-            let extraClass = "quill-iframe-yt"; // 例としてYouTube用のクラスをセット
             const src = iframeTag !== "" ? iframeTag : iframeURL;
             const iframeSrc = getSrc(googleDriveFilter(src));
+            let extraClass = src.indexOf("youtube") >= 0 ? "quill-iframe-yt" : ""; // 例としてYouTube用のクラスをセット
 
             const iframeUrlPattern = /^(https?:\/\/)/i;
             if (!iframeUrlPattern.test(iframeSrc)) {
@@ -238,7 +238,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("iframe-url").value = "";
         document.getElementById("iframe-tag").value = "";
+
+        // const editorContainer = document.getElementById('ql-editor');
+        const editorContainer = document.querySelector(".ql-editor");
+        const currentScroll = window.screenTop || document.documentElement.scrollTop;
+        setTimeout(() => {
+            window.scrollTo(0, document.documentElement.scrollTop);
+        }, 0);
+        // コンテナ内の末尾にスクロール
+        editorContainer.scrollTo({
+            top: editorContainer.scrollHeight,
+            behavior: "auto",
+        });
+        document.body.style.overflow = "hidden";
+
         insertModal.hide();
+        document.body.style.overflow = "auto";
     });
 
     // ----------------------------------------------------

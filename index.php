@@ -36,7 +36,7 @@ ini_set('display_errors', "On");
                 <!--  -->
                 <div class="edit_area hidden edit_gr">
                     <?php include('./web/components/hero.php') ?>
-                    <?php include('./web/components/quill_editer.php') ?>
+                    <?php include('./web/components/quill_editor.php') ?>
                     <?php include('./web/components/footer.php') ?>
                 </div>
 
@@ -45,13 +45,13 @@ ini_set('display_errors', "On");
                         <p class="page_list_title"><i class="fa-solid fa-lock-open"></i> 公開中</p>
                         <div id="public_area">
                             <!-- insert here -->
-                            <p style="color:#9b9797;">公開ページはありません</p>
+                            <p style="color:#9b9797;padding:0 2%">公開ページはありません</p>
                         </div>
                         <hr style="margin: 1.5rem 0;">
                         <p class="page_list_title"><i class="fa-solid fa-lock"></i> 下書き/非公開</p>
                         <div id="draft_area">
                             <!-- insert here -->
-                            <p style="color:#9b9797;">下書き/非公開ページはありません</p>
+                            <p style="color:#9b9797;padding:0 2%">下書き/非公開ページはありません</p>
                         </div>
 
                     </div>
