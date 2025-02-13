@@ -1,7 +1,7 @@
 // ql-editor ql-blank
 import { display_control } from "./common.js";
 
-export function concat_html(page_title, hero_title, hero_bg, toc_content, editor_contents, footer_content) {
+export function concat_html(page_title, hero_title, hero_bg, hero_color, toc_content, editor_contents, footer_content) {
     const meta_html = `<!DOCTYPE html>
     <html lang="ja">
     <head>
@@ -29,7 +29,7 @@ export function concat_html(page_title, hero_title, hero_bg, toc_content, editor
 
     const hero_content = `<div class="parts_hero">
     <img class="part_hero__background" src="${hero_bg}" alt="">
-    <pre class="parts_hero__title" style="border: none;">${hero_title}</pre></div>`;
+    <pre class="parts_hero__title" style="border: none; color:${hero_color}">${hero_title}</pre></div>`;
 
     let body_html = `<body>
     <header>

@@ -26,12 +26,17 @@
         <select class="ql-size" title="文字サイズ">
             <option value="12px">12px</option>
             <option value="14px">14px</option>
-            <option value="16px" selected>16px</option>
-            <option value="18px">18px</option>
+            <option value="16px">16px</option>
+            <option value="18px"selected>18px</option>
             <option value="20px">20px</option>
             <option value="24px">24px</option>
             <option value="32px">32px</option>
-            <option value="custom">カスタム</option>
+            <option value="36px">36px</option>
+            <option value="40px">40px</option>
+            <option value="48px">48px</option>
+            <option value="64px">64px</option>
+            <option value="72px">72px</option>
+            <option value="96px">96px</option>
             <!-- カスタムサイズ選択肢 -->
         </select>
         

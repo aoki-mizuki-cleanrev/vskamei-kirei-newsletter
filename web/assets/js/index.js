@@ -55,6 +55,21 @@ hero_bg_image_input.addEventListener("change", (e) => {
     });
 });
 
+// Hero Color
+const picker = document.querySelector("#hero_color_picker");
+const hero_text = document.querySelector(".hero_title_container");
+picker.addEventListener("change", () => {
+    console.log([hero_text.children]);
+    // volとか.とか
+    hero_text.style.color = picker.value;
+    // inputの中
+    [...hero_text.children].forEach((item) => {
+        if (item.style.color != undefined) {
+            item.style.color = picker.value;
+        }
+    });
+});
+
 //MODAL Tab Switch
 function tabClick() {
     let tab = document.getElementsByName("tab");
@@ -91,6 +106,7 @@ document.addEventListener("scroll", () => {
 // ##   Page-control display
 // ############################################
 const public_area = document.querySelector("#public_area");
+const private_area = document.querySelector("#private_area");
 const draft_area = document.querySelector("#draft_area");
 
 function generate_page_title(str) {
@@ -121,7 +137,7 @@ function fetch_public() {
                 const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
                 // console.log(sorted_data);
 
-                let public_html = '<ul class="page_list draft">';
+                let public_html = '<ul class="page_list private">';
                 [...sorted_data].map((item) => {
                     console.log(item[1]);
                     item[1].map((file_name) => {
@@ -152,10 +168,10 @@ function fetch_public() {
 fetch_public();
 // ----------------------------------------------------------------------
 
-// DRAFT
-function fetch_draft() {
-    console.log("2DRAFT");
-    fetch("./draft_list.php")
+// private
+function fetch_private() {
+    console.log("2private");
+    fetch("./private_list.php")
         .then((res) => {
             if (res.ok) {
                 return res.json();
@@ -176,34 +192,102 @@ function fetch_draft() {
                 const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
                 // console.log(sorted_data);
 
-                let draft_html = '<ul class="page_list draft">';
+                let private_html = '<ul class="page_list private">';
                 [...sorted_data].map((item) => {
                     console.log(item[1]);
                     item[1].map((file_name) => {
-                        draft_html += `<li data-link="./draft_pages${file_name.replace(
+                        private_html += `<li data-link="./private_pages${file_name.replace(
                             ".",
                             ""
                         )}"> <div class="page_name">${generate_page_title(file_name)} </div><div class="btn_wrapper">\
-                    <button type="button" class="delete_btn" title="削除" onclick="delete_draft('./draft_pages${file_name.replace(
+                    <button type="button" class="delete_btn" title="削除" onclick="delete_private('./private_pages${file_name.replace(
                         ".",
                         ""
                     )}')"><i class="fas fa-trash-can"></i></button>\
-                    <button type="button" class="switch_btn be_public" data-link="./draft_pages${file_name.replace(
+                    <button type="button" class="switch_btn be_public" data-link="./private_pages${file_name.replace(
                         ".",
                         ""
                     )}" title="公開する">公開</button>\
-                    <button type="button" class="watch_btn" onclick="window.open('./draft_pages${file_name.replace(
+                    <button type="button" class="watch_btn" onclick="window.open('./private_pages${file_name.replace(
                         ".",
                         ""
                     )}','_blank')"><i class="fa-solid fa-eye"></i></button>\
                     </div> </li>`;
                     });
                 });
+                private_html += "</ul>";
+                private_area.innerHTML = private_html;
+                console.log(private_html);
+            } else {
+                private_area.innerHTML = '<p style="color:#9b9797;padding:0 2%">非公開ページはありません</p>';
+            }
+        })
+        .catch((er) => {
+            console.error("error!", er);
+        });
+}
+fetch_private();
+// ----------------------------------------------------------------------
+
+// draft
+function fetch_draft() {
+    console.log("2draft");
+    fetch("./draft_list.php")
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Network response was not ok!");
+            }
+        })
+        .then((data) => {
+            console.log(data);
+            const sorted_keys = Object.keys(data).sort((a, b) => {
+                // "yyyy" のような文字列を後ろにする
+                const numA = isNaN(a) ? -Infinity : parseInt(a, 10);
+                const numB = isNaN(b) ? -Infinity : parseInt(b, 10);
+                return numB - numA; // 降順ソート
+            });
+            // データの有無による表示切り替え
+            if (data.length != 0) {
+                // const sorted_data = new Map(sorted_keys.map((key) => [key, data[key]]));
+                console.log(data);
+
+                let draft_html = '<ul class="page_list draft">';
+                [...data].map((item, index) => {
+                    let filename = item.replace("/var/www/html/vskamei-kirei-newsletter/draft_pages/", "");
+                    draft_html += `<li data-link="./draft_pages/${filename}}> <div class="page_name">${index} </div><div class="btn_wrapper">\
+                    <button type="button" class="delete_btn" title="削除" onclick="delete_private('./draft_pages/${filename}')"><i class="fas fa-trash-can"></i></button>\
+                    </div></li>`;
+                });
+
+                // [...data].map((item) => {
+                //     console.log();
+                //     item[1].map((file_name) => {
+                //         draft_html += `<li data-link="./draft_pages${file_name.replace(
+                //             ".",
+                //             ""
+                //         )}"> <div class="page_name">${generate_page_title(file_name)} </div><div class="btn_wrapper">\
+                //     <button type="button" class="delete_btn" title="削除" onclick="delete_draft('./draft_pages${file_name.replace(
+                //         ".",
+                //         ""
+                //     )}')"><i class="fas fa-trash-can"></i></button>\
+                //     <button type="button" class="switch_btn be_public" data-link="./draft_pages${file_name.replace(
+                //         ".",
+                //         ""
+                //     )}" title="公開する">公開</button>\
+                //     <button type="button" class="watch_btn" onclick="window.open('./draft_pages${file_name.replace(
+                //         ".",
+                //         ""
+                //     )}','_blank')"><i class="fa-solid fa-eye"></i></button>\
+                //     </div> </li>`;
+                //     });
+                // });
                 draft_html += "</ul>";
                 draft_area.innerHTML = draft_html;
                 console.log(draft_html);
             } else {
-                draft_area.innerHTML = '<p style="color:#9b9797;padding:0 2%">下書き/非公開ページはありません</p>';
+                draft_area.innerHTML = '<p style="color:#9b9797;padding:0 2%">非公開ページはありません</p>';
             }
         })
         .catch((er) => {
@@ -233,7 +317,7 @@ function switch_public(file_path) {
         })
         .then((data) => {
             fetch_public();
-            fetch_draft();
+            fetch_private();
         })
         .catch((er) => console.error("Error!!", er));
 }
@@ -243,7 +327,7 @@ function switch_private(file_path) {
         from_path: "." + file_path,
     };
 
-    fetch("./backend/process_draft_page.php", {
+    fetch("./backend/process_private_page.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -259,7 +343,7 @@ function switch_private(file_path) {
         })
         .then((data) => {
             fetch_public();
-            fetch_draft();
+            fetch_private();
         })
         .catch((er) => console.error("Error!!", er));
 }
@@ -343,7 +427,7 @@ document.addEventListener("click", (e) => {
     }
 });
 
-function delete_draft(url) {
+function delete_private(url) {
     const post_data = {
         path: url,
     };
@@ -363,6 +447,7 @@ function delete_draft(url) {
                 }
             })
             .then((data) => {
+                fetch_private();
                 fetch_draft();
                 // console.log(data);
             })

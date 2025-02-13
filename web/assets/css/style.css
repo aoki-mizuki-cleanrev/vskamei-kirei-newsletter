@@ -364,9 +364,14 @@ pre.parts_hero__title {
     z-index: 3;
 
     display: flex;
-    flex-direction: column;
-
+    flex-direction: row;
+    gap: 20px;
     color: #fff;
+}
+
+.wrap_col {
+    display: flex;
+    flex-direction: column;
 }
 
 .parts_hero__image_input {

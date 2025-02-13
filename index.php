@@ -48,10 +48,16 @@ ini_set('display_errors', "On");
                             <p style="color:#9b9797;padding:0 2%">公開ページはありません</p>
                         </div>
                         <hr style="margin: 1.5rem 0;">
-                        <p class="page_list_title"><i class="fa-solid fa-lock"></i> 下書き/非公開</p>
+                        <p class="page_list_title"><i class="fa-solid fa-lock"></i> 非公開</p>
+                        <div id="private_area">
+                            <!-- insert here -->
+                            <p style="color:#9b9797;padding:0 2%">非公開ページはありません</p>
+                        </div>
+                        <hr style="margin: 1.5rem 0;">
+                        <p class="page_list_title"><i class="fa-solid fa-pen-ruler"></i> 下書き</p>
                         <div id="draft_area">
                             <!-- insert here -->
-                            <p style="color:#9b9797;padding:0 2%">下書き/非公開ページはありません</p>
+                            <p style="color:#9b9797;padding:0 2%">下書きはありません</p>
                         </div>
 
                     </div>

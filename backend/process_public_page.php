@@ -12,7 +12,7 @@ $from_path = $post['from_path']; //公開から非公開に変える時
 // echo $file_name;
 
 $from_path = isset($from_path) ?  $from_path :'../output/data.php';
-$to_path = isset($file_name) ? '../public_pages/'.$file_name.'.php' : str_replace('draft_pages', 'public_pages', $from_path);
+$to_path = isset($file_name) ? '../public_pages/'.$file_name.'.php' : str_replace('private_pages', 'public_pages', $from_path);
 
 
 if (!copy($from_path, $to_path)) {

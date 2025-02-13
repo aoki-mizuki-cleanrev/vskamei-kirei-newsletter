@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- フォントサイズのカスタム設定 ---
     const Size = Quill.import("formats/size");
-    Size.whitelist = ["12px", "14px", "16px", "18px", "20px", "24px", "32px"];
+    Size.whitelist = ["12px", "14px", "16px", "18px", "20px", "24px", "32px", "36px", "40px", "48px", "64px", "72px", "96px"];
     Quill.register(Size, true);
 
     // ====================================================
@@ -343,11 +343,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // const hero_title = document.querySelector("#parts_hero__title").value;
 
         const hero_bg = document.querySelector(".part_hero__background").src;
+        const hero_color = document.querySelector("#hero_color_picker").value;
         const top = document.querySelector("#toc-container").innerHTML;
         const content = quill.root.innerHTML;
         const footer = document.querySelector("footer").outerHTML;
 
-        const concat = concat_html(page_title, hero_title, hero_bg, top, content, footer);
+        const concat = concat_html(page_title, hero_title, hero_bg, hero_color, top, content, footer);
         if (isPreview) {
             create_page(concat).then((preview_html) => {
                 document.querySelector(".cover").outerHTML = preview_html;
@@ -397,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const concat = outputFileHandler();
         create_page(concat)
             .then(() => {
-                return fetch("./backend/process_draft_page.php", {
+                return fetch("./backend/process_private_page.php", {
                     method: "POST",
                     headers: { "Content-Type": "Application/json" },
                     body: JSON.stringify(post_data),

@@ -129,6 +129,24 @@ section {
 .ql-size-32px {
     font-size: 32px;
 }
+.ql-size-36px {
+    font-size: 36px;
+}
+.ql-size-40px {
+    font-size: 40px;
+}
+.ql-size-48px {
+    font-size: 48px;
+}
+.ql-size-64px {
+    font-size: 64px;
+}
+.ql-size-72px {
+    font-size: 72px;
+}
+.ql-size-96px {
+    font-size: 96px;
+}
 
 .ql-align-right {
     text-align: right;
