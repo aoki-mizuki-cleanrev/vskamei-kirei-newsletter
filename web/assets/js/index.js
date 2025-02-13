@@ -102,6 +102,53 @@ document.addEventListener("scroll", () => {
     // console.log("Scroll", document.documentElement.scrollTop);
 });
 
+function draft_save(filename) {
+    const post_data = {
+        title: filename,
+    };
+    fetch("./backend/process_draft_page.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post_data),
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.text();
+            } else {
+                throw new Error("Network response was not ok");
+            }
+        })
+        .then((data) => {
+            if (data == "success") {
+                console.log("ok");
+            } else {
+                console.log("NG");
+            }
+        })
+        .catch((er) => console.error("Error!", er));
+}
+
+// Auto save用！----------------------------------------
+// 監視ターゲットの取得
+const target = document.getElementById("editor-container");
+
+// オブザーバーの作成
+const observer = new MutationObserver((records) => {
+    // 変化が発生したときの処理を記述
+    console.log("変化！");
+    draft_save("test_aaa");
+});
+
+// 監視の開始
+observer.observe(target, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+});
+// ----------------------------------------------------
+
 // ############################################
 // ##   Page-control display
 // ############################################

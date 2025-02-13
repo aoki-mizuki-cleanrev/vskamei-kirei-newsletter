@@ -33,5 +33,5 @@ fclose($file_handle);
 
 }
 
-echo 'https://133.18.178.100/vskamei-kirei-newsletter/output/data.html';
+// echo 'https://133.18.178.100/vskamei-kirei-newsletter/output/data.html';
 return ;
